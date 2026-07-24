@@ -17,13 +17,14 @@ spec:
       filters:
         - type: URLRewrite
           urlRewrite:
+            hostname: ping-pong-knative.exercises.172.18.0.2.sslip.io                      
             path:
               type: ReplacePrefixMatch
-              replacePrefixMatch: /
+              replacePrefixMatch: /pingpong
 
       backendRefs:
-        - name: ping-pong-svc
-          port: 2345
+        - name: ping-pong-knative       
+          port: 80
 
     - matches:
         - path:

@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const filePath = "/usr/src/app/files/log.txt";
 const infoFilePath = "/usr/src/app/config/information.txt";
 const message = process.env.message;
+const pingPongUrl = process.env.PING_PONG_URL;
 
 const getStatus = async () => {
     const log = fs.existsSync(filePath)
@@ -18,9 +19,7 @@ const getStatus = async () => {
         ? fs.readFileSync(infoFilePath, "utf8")
         : "No text yet";
 
-    const response = await fetch(
-        "http://ping-pong-svc:2345/pings"
-    );
+    const response = await fetch(`${pingPongUrl}/pings`);
 
     if (!response.ok) {
         throw new Error(
@@ -31,16 +30,14 @@ const getStatus = async () => {
     const counter = await response.text();
 
     return `file content: ${content}
-env variable: MESSAGE=${message}
-${log}
-Ping / Pongs: ${counter}`;
-};
+        env variable: MESSAGE=${message}
+        ${log}
+        Ping / Pongs: ${counter}`;
+        };
 
 app.get("/ready", async (req, res) => {
     try {
-        const response = await fetch(
-            "http://ping-pong-svc:2345/ready"
-        );
+        const response = await fetch(`${pingPongUrl}/ready`);
 
         if (!response.ok) {
             return res
