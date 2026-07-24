@@ -61,6 +61,9 @@
 ### Chapter 6
 
 - [5.4.](https://github.com/Colabres/kubernetes/tree/5.4/wikipedia)
+- [5.6.](https://github.com/Colabres/kubernetes/tree/5.6/screenshots)
+- [5.7.](https://github.com/Colabres/kubernetes/tree/5.7/log-output)
+
 ## PostgreSQL in GKE (StatefulSet + PVC)
 
 ### Advantages
