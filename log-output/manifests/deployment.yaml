@@ -26,14 +26,14 @@ spec:
       containers:
         - name: log-writer
           image: log-writer
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Never
           volumeMounts: 
           - name: shared-data
             mountPath: /usr/src/app/files
         - name: log-reader
           #image: europe-north1-docker.pkg.dev/dwk-gke-502612/dwk-repository/log-reader:v1
-          image: log-reader
-          imagePullPolicy: IfNotPresent
+          image: log-reader:knative
+          imagePullPolicy: Never
           readinessProbe:
             httpGet:
               path: /ready
@@ -47,6 +47,8 @@ spec:
             - name: shared-data
               mountPath: /usr/src/app/files
           env:
+            - name: PING_PONG_URL
+              value: http://ping-pong-knative.exercises.svc.cluster.local
             - name: message
               valueFrom:
                 configMapKeyRef:

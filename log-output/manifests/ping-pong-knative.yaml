@@ -1,0 +1,32 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ping-pong-knative
+  namespace: exercises
+spec:
+  template:
+    spec:
+      containers:
+      - image: dev.local/ping-pong:knative-v2
+        imagePullPolicy: Never      
+        ports:
+        - containerPort: 3000
+
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+        env:
+          - name: POSTGRES_HOST
+            value: postgres-svc
+          - name: POSTGRES_PORT
+            value: "5432"
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: example-password
+          - name: POSTGRES_DB
+            value: postgres

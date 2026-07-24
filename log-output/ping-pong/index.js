@@ -42,7 +42,7 @@ app.get("/ready", async (req, res) => {
 
 
 
-app.get("/", async (req, res) => {
+app.get("/pingpong", async (req, res) => {
     try {
         const result = await pool.query(`
             UPDATE ping_pong_counter
