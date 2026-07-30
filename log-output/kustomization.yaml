@@ -3,8 +3,8 @@ kind: Kustomization
 
 namespace: exercises
 
-resources:
 
+resources:
 - manifests/ping-pong-knative.yaml
 - manifests/analysistemplate.yaml
 - storage/persistentvolume.yaml
@@ -20,11 +20,11 @@ resources:
 
 images:
 - name: log-reader
-  newName: log-reader
-  newTag: knative
+  newName: ghcr.io/colabres/log-reader
+  newTag: 6396f99249fda14824cd34b5e5a64ef19a803fb8
 - name: log-writer
   newName: ghcr.io/colabres/log-writer
-  newTag: 205e2e558df041415201c138587f717b3d97e80d
+  newTag: 6396f99249fda14824cd34b5e5a64ef19a803fb8
 - name: ping-pong
-  newName: ping-pong
-  newTag: knative-v2
+  newName: ghcr.io/colabres/ping-pong
+  newTag: 6396f99249fda14824cd34b5e5a64ef19a803fb8
